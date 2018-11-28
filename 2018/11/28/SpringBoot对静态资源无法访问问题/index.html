@@ -25,14 +25,14 @@
 <meta property="og:site_name" content="阿飞の面具">
 <meta property="og:description" content="问题今天在学习SpringBoot-拦截器项目学习中遇到了拦截器拦截静态资源(.css,.js)问题。导致网页中的没有样式  在SpringBoot官方文档中指出将静态资源放在指定的路径下会自动做好静态资源的映射。类路径下（resources包下的  SpringBoot对静态资源的默认扫描路径:  classpath:/static classpath:/public classpath:/re">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://shanggaofeng1996.github.io/2018/11/themes/pure/source/images/1.png">
-<meta property="og:image" content="https://shanggaofeng1996.github.io/2018/11/themes/pure/source/images/2.png">
-<meta property="og:image" content="https://shanggaofeng1996.github.io/2018/11/themes/pure/source/images/3.png">
-<meta property="og:updated_time" content="2018-11-28T08:19:54.510Z">
+<meta property="og:image" content="https://shanggaofeng1996.github.io/images/1.png">
+<meta property="og:image" content="https://shanggaofeng1996.github.io/images/2.png">
+<meta property="og:image" content="https://shanggaofeng1996.github.io/images/3.png">
+<meta property="og:updated_time" content="2018-11-28T14:55:11.552Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot对静态资源无法访问问题">
 <meta name="twitter:description" content="问题今天在学习SpringBoot-拦截器项目学习中遇到了拦截器拦截静态资源(.css,.js)问题。导致网页中的没有样式  在SpringBoot官方文档中指出将静态资源放在指定的路径下会自动做好静态资源的映射。类路径下（resources包下的  SpringBoot对静态资源的默认扫描路径:  classpath:/static classpath:/public classpath:/re">
-<meta name="twitter:image" content="https://shanggaofeng1996.github.io/2018/11/themes/pure/source/images/1.png">
+<meta name="twitter:image" content="https://shanggaofeng1996.github.io/images/1.png">
   <!-- Canonical links -->
   <link rel="canonical" href="https://shanggaofeng1996.github.io/2018/11/28/SpringBoot对静态资源无法访问问题/index.html">
   
@@ -228,7 +228,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -240,6 +240,21 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled no-thumbnail">
         
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2018/11/28/images/" class="title">images</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-11-28T08:29:31.000Z" itemprop="datePublished">2018-11-28</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-inner">
@@ -329,7 +344,7 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>今天在学习SpringBoot-拦截器项目学习中遇到了拦截器拦截静态资源(.css,.js)问题。导致网页中的没有样式</p>
-<p><img src="../../themes/pure/source/images/1.png" alt=""></p>
+<p><img src="/images/1.png" alt=""></p>
 <p>在SpringBoot官方文档中指出将静态资源放在指定的路径下会自动做好静态资源的映射。类路径下（resources包下的  <br>SpringBoot对静态资源的默认扫描路径:</p>
 <ul>
 <li>classpath:/static</li>
@@ -337,7 +352,7 @@
 <li>classpath:/resources</li>
 <li>classpath:/META-INF/resources</li>
 </ul>
-<p><br>我项目静态资源位置如下图<br><br><img src="../../themes/pure/source/images/2.png" alt=""><br><br>个人表示已经放在SpringBoot指定的路径下了，还是进行了拦截！！！</p>
+<p><br>我项目静态资源位置如下图<br><br><img src="/images/2.png" alt=""><br><br>个人表示已经放在SpringBoot指定的路径下了，还是进行了拦截！！！</p>
 <h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>后来阅读大量的博客和解决办法，是因为SpringBooot2.0以后的版本对静态资源进行了拦截！真的是这样末？？？？个人觉得应该不是这样吧！！不能在版本更新的过程中，将上个版本的优点摸掉吧！应该取长补短吧！！！<br>目前我的解决办法就是对改路径下的所有静态资源进行放行操作！<br>‘’’</p>
 <pre><code>//注册拦截器
 @Override
@@ -345,7 +360,7 @@ public void addInterceptors(InterceptorRegistry registry) {
     //super.addInterceptors(registry);
     //&quot;/**&quot;表示拦截所有
     registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns(&quot;/**&quot;).excludePathPatterns(&quot;/login.html&quot;,&quot;/&quot;,&quot;/user/login&quot;,&quot;/asserts/**&quot;,&quot;/webjars/**&quot;);
-</code></pre><p>对类路径下的asserts,webjars包里的所有放行！<br>这样就对静态资源放行了！！！刷新页面可看到<br><img src="../../themes/pure/source/images/3.png" alt=""></p>
+</code></pre><p>对类路径下的asserts,webjars包里的所有放行！<br>这样就对静态资源放行了！！！刷新页面可看到<br><img src="/images/3.png" alt=""></p>
 
       
     </div>
@@ -400,6 +415,10 @@ public void addInterceptors(InterceptorRegistry registry) {
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/11/28/images/" title="images"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
     
     
     <li class="next">
